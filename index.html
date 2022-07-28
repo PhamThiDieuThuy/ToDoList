@@ -1,11 +1,29 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        To do list
-    </head>
-    <body>
-        <header>
-            <h1>TO DO LIST</h1>
-        </header>
-    </body>
+
+<head>
+    <link rel="stylesheet" href="app/css/style.css">
+    <script src="/app/js/script.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <h1>TO DO LIST</h1>
+    </header>
+    <div>
+        <input type="text" placeholder="Task name" id="task_name">
+        <br>
+    </div>
+    <div>
+        <label class="due_date">Due date</label>
+        <input type="datetime-local">
+    </div>
+    <button onclick="addTask()">Add Task</button>
+    <ul id="task_list">
+        <li>Task 1</li>
+    </ul>
+
+</body>
+
 </html>
