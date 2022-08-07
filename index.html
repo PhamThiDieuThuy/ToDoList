@@ -1,29 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html onload="onLoad">
 
 <head>
     <link rel="stylesheet" href="app/css/style.css">
     <script src="/app/js/script.js"></script>
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
     <header>
         <h1>TO DO LIST</h1>
     </header>
-    <div>
-        <input type="text" placeholder="Task name" id="task_name">
+    <div class="inputAuth">
+        <label>Task Name</label>
         <br>
-    </div>
-    <div>
+        <input class="input" type="text" placeholder="Task name" id="task_name">
+        <br>
+        <br>
         <label class="due_date">Due date</label>
-        <input type="datetime-local">
+        <br>
+        <input class="input" type="datetime-local" id="datetime_picker">
     </div>
-    <button onclick="addTask()">Add Task</button>
-    <ul id="task_list">
-        <li>Task 1</li>
-    </ul>
-
+    <br>
+    <div class="button1">
+    <button class="button" id="add_task" onclick="addTask()">Add Task</button>
+    <br>
+    <br>
+    <button class="button" id="edit" onclick="edit()">Edit</button>
+    <button class="button" id="delete" onclick="del()">Delete</button>
+    <button class="button" id="sort" onclick="sort()">Sort</button>
+<br>
+<br>
+    </div >
+    <div class="wrap">
+    
+    <button class="searchbutton" onclick="search()">
+    <img src="./font/search.png" height="20px"/>
+    <input type="text" id="searchTerm" placeholder="Search" >
+    </button>
+    </div>
+    
+    <ol id="task_list">
+    </ol>
+   
 </body>
 
 </html>
