@@ -9,9 +9,10 @@
 
 <body>
     <header>
-        <h1>TO DO LIST</h1>
+        <h1 lang="en">TO DO LIST</h1>
     </header>
-    <div class="inputAuth">
+        
+        <div class="inputAuth">
         <label>Task Name</label>
         <br>
         <input class="input" type="text" placeholder="Task name" id="task_name">
@@ -19,7 +20,7 @@
         <br>
         <label class="due_date">Due date</label>
         <br>
-        <input class="input" type="datetime-local" id="datetime_picker">
+        <input class="input" type="date" id="datetime_picker" placeholder="date & time">
     </div>
     <br>
     <div class="button1">
@@ -35,13 +36,26 @@
     <div class="wrap">
     
     <button class="searchbutton" onclick="search()">
-    <img src="./font/search.png" height="20px"/>
-    <input type="text" id="searchTerm" placeholder="Search" >
+        <img src="./font/search.png" height="20px" alt="search"/>
+   
     </button>
+    <input type="text" id="searchTerm" placeholder="Search">
     </div>
     
     <ol id="task_list">
+        <li>
+            <button>
+                <ul>
+                    <li>
+                        Edit
+                    </li>
+                </ul>
+            </button>
+
+            <div> dafjd</div>
+        </li>
     </ol>
+
    
 </body>
 
