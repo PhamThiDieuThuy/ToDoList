@@ -90,3 +90,7 @@ h1{
    bottom: 3px;
    right: 0;
  }
+
+ #menuEdit{
+  display: block;
+ }

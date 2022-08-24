@@ -21,7 +21,8 @@ function addTask() {
     let selecter = document.createElement('button');
     selecter.setAttribute('id', 'select');
     selecter.innerHTML = "..."
-    selecter.addEventListener('click', select)
+    selecter.addEventListener('mouseenter', select);
+    selecter.addEventListener('mouseleave', leave);
     itemElement.appendChild(selecter);
 
     function select() {
@@ -31,14 +32,30 @@ function addTask() {
         let edit = document.createElement('li');
         ul.appendChild(edit);
         edit.innerHTML = "Edit"
-    }
-    // div.innerHTML = "edit";
+        edit.addEventListener('click', editLi)
+        let del = document.createElement('li');
+        ul.appendChild(del);
+        del.innerHTML= "Delete";
+        let done = document.createElement('li');
+        ul.appendChild(done);
+        done.innerHTML = "Done"
 
+    }
+    function leave(event){
+         let btn = event.srcElement
+        btn.removeChild(btn.childNodes[1]);
+        
+    }
+    
     taskListElem.appendChild(itemElement);
     let div = document.createElement('div');
-    div.innerHTML = dueDate + ' <br><br>' + taskName;
-    itemElement.appendChild(div);
-
+     itemElement.appendChild(div);
+    let h4 = document.createElement('h4')
+    h4.innerHTML = dueDate;
+    div.appendChild(h4)
+    let p=document.createElement('p');
+    p.innerHTML = taskName;
+    div.appendChild(p)
     // Save to local storage
     let newIndex = taskList.length;
 
@@ -47,6 +64,19 @@ function addTask() {
     localStorage.setItem(key, value)
 }
 
+function editLi(event){
+    console.log(event)
+    let editbtn = event.srcElement
+    let ul = editbtn.parentNode;
+    let btn = ul.parentNode;
+    let div = btn.nextElementSibling;
+    console.log(div)
+    let h4 = div.childNodes;
+    let taskName = document.getElementById("task_name");
+    let dueDate = document.getElementById("datetime_picker");
+    dueDate.value = h4[0].innerHTML;
+    taskName.value =h4[1].innerHTML
+}
 
 function onClickItem(event) {
     let item = event.path[0];
