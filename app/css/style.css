@@ -2,8 +2,9 @@ h1{
    font-size: 10;
    color: blue; 
    text-align: center;
+   margin-top: 70px;
 }
-p{color: rgb(226, 43, 43); text-align: center;}
+
 .para{
    color: aqua;
 }
@@ -24,13 +25,15 @@ p{color: rgb(226, 43, 43); text-align: center;}
 
 
 #searchTerm{
-   width: 175x;
+   width: 250px;
   border: 3px solid #00B4CC;
    padding: 5px;
   height: 20px;
   border-radius: 5px 5px 5px 5px;
   outline: none;
   color: #9DBFAF;
+
+
   }
 
  .searchbutton{
@@ -41,21 +44,22 @@ p{color: rgb(226, 43, 43); text-align: center;}
    color: #fff;
    cursor: pointer;
    font-size: 20px;
-   Display : flex;
-   align-items: center;
-   justify-content: space-between;
-   margin-left: 545px;
+
  
  }
 
- /* .wrap{
-   width: 10%;
-   position: relative;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%, -50%);
+ .wrap{
+   background-color: #4d4dc4;
+   height: 60px;
+   position: fixed;
+   top: 0;
+   left: 0;
+   right: 0;
+   display: flex;
+   align-items: center;
+   justify-content: center;
 
- } */
+ }
  .inputAuth{
    margin-left: 550px;
  
@@ -69,3 +73,20 @@ p{color: rgb(226, 43, 43); text-align: center;}
 
  .section { height: 100vh;}
  .section—first { height: 90vh; }
+
+ li{
+   padding: 8px;
+   border: 1px solid #333;
+   margin: 10px auto;
+   background-color: rgb(225, 248, 237);
+ }
+
+ #select{
+   position: relative;
+ }
+
+ #menuEdit{
+   position: absolute;
+   bottom: 3px;
+   right: 0;
+ }
