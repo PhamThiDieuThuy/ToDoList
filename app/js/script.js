@@ -2,10 +2,11 @@
 
 let taskList = [];
 let currentItemIndex = -1;
+let edittingDiv = null;
 
 function addTask() {
     let taskListElem = document.getElementById('task_list');
-    let itemElement = document.createElement('li');
+    itemElement = document.createElement('li');
     // itemElement.onclick = onClickItem;
 
     let taskNameElement = document.getElementById("task_name");
@@ -52,9 +53,11 @@ function addTask() {
      itemElement.appendChild(div);
     let h4 = document.createElement('h4')
     h4.innerHTML = dueDate;
+    dateInFuture = document.getElementById("datetime_picker").value = "";
     div.appendChild(h4)
     let p=document.createElement('p');
     p.innerHTML = taskName;
+    document.getElementById("task_name").value= "";
     div.appendChild(p)
     // Save to local storage
     let newIndex = taskList.length;
@@ -65,31 +68,41 @@ function addTask() {
 }
 
 function editLi(event){
-    console.log(event)
+ 
     let editbtn = event.srcElement
     let ul = editbtn.parentNode;
     let btn = ul.parentNode;
-    let div = btn.nextElementSibling;
-    console.log(div)
-    let h4 = div.childNodes;
+    edittingDiv = btn.nextElementSibling;
+    let h4 = edittingDiv.childNodes;
     let taskName = document.getElementById("task_name");
     let dueDate = document.getElementById("datetime_picker");
     dueDate.value = h4[0].innerHTML;
-    taskName.value =h4[1].innerHTML
+    taskName.value =h4[1].innerHTML;
+    let saveButton = document.getElementById('saveButton');
+    saveButton.addEventListener('click',saveEdit);
+    document.getElementById('saveButton').style.display='initial';
+    document.getElementById('add_task').style.display = 'none';
+  
 }
+function saveEdit(){
+    if(edittingDiv!= null)
+    {
+        console.log(edittingDiv)
+        let h4 = edittingDiv.firstChild
+        console.log(h4)
+        h4.innerHTML = document.getElementById("datetime_picker").value
+        let p = edittingDiv.lastChild;
+        p.innerHTML = document.getElementById('task_name').value;
+        document.getElementById("datetime_picker").value = '';
+        document.getElementById('task_name').value = '';
+        document.getElementById('saveButton').style.display='none';
+        document.getElementById('add_task').style.display = 'initial';
+        
+    }
+}    
 
-function onClickItem(event) {
-    let item = event.path[0];
-    let itemParent = item.parentNode;
-    currentItemIndex = Array.prototype.indexOf.call(itemParent.children, item);
-
-    let taskName = document.getElementById("task_name");
-    let dueDate = document.getElementById("datetime_picker");
-    dueDate.value = taskList[currentItemIndex].dueDate;
-    taskName.value = taskList[currentItemIndex].taskName
 
 
-}
 function edit() {
 
     let taskName = document.getElementById("task_name").value;
