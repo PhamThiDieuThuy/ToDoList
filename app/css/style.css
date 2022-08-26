@@ -94,3 +94,10 @@ h1{
  #menuEdit{
   display: block;
  }
+
+ .barButton{
+  background-color: #4d4dc4;
+  color: white;
+  border: none;
+  font-size: 17px;
+ }

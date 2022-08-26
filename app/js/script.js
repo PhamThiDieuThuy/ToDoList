@@ -37,8 +37,10 @@ function addTask() {
         let del = document.createElement('li');
         ul.appendChild(del);
         del.innerHTML= "Delete";
+        del.addEventListener('click',dele)
         let done = document.createElement('li');
         ul.appendChild(done);
+        done.addEventListener('click', did);
         done.innerHTML = "Done"
 
     }
@@ -82,6 +84,8 @@ function editLi(event){
     saveButton.addEventListener('click',saveEdit);
     document.getElementById('saveButton').style.display='initial';
     document.getElementById('add_task').style.display = 'none';
+    let list = btn.parentNode;
+    list.style.backgroundColor = "rgba(112,112,122,0.5";
   
 }
 function saveEdit(){
@@ -97,34 +101,32 @@ function saveEdit(){
         document.getElementById('task_name').value = '';
         document.getElementById('saveButton').style.display='none';
         document.getElementById('add_task').style.display = 'initial';
-        
+        let list = edittingDiv.parentNode;
+        list.style.backgroundColor ="rgb(225, 248, 237)";
     }
 }    
 
+function dele(event) {
+    let ul = event.path[3];
+    ul.remove();
+    }
 
+function did(event){
+    console.log(event)
+    let btn = event.path[2];
+    let div = btn.nextElementSibling;
+    let h4 = div.firstChild;
+    let p = div.lastChild;
+    let delh4 = document.createElement('s');
+    h4.appendChild(delh4)
+    let text = h4.firstChild
+    delh4.appendChild(text)
+    let delP = document.createElement('s');
+    p.appendChild(delP);
+    let text1 = p.firstChild
+    delP.appendChild(text1)
+}    
 
-function edit() {
-
-    let taskName = document.getElementById("task_name").value;
-    let dueDate = document.getElementById("datetime_picker").value;
-
-    taskList[currentItemIndex] = { taskName, dueDate };
-
-    let taskListElem = document.getElementById('task_list');
-    let itemElement = taskListElem.children
-
-    itemElement[currentItemIndex].innerHTML = taskName + " AT " + dueDate
-
-}
-
-function del() {
-    taskList.splice(currentItemIndex, 1);
-    let taskListElem = document.getElementById('task_list');
-    let itemElement = taskListElem.children;
-    let items = taskListElem.removeChild(itemElement[currentItemIndex])
-    console.log(items)
-    console.log(taskList)
-}
 function compare(a, b) {
     let taskNameA = a.dueDate;
     let taskNameB = b.taskName;
