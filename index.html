@@ -2,6 +2,8 @@
 <html onload="onLoad">
 
 <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1560183548178955"
+     crossorigin="anonymous"></script>
     <link rel="stylesheet" href="app/css/style.css">
     <script src="/app/js/script.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -28,14 +30,9 @@
     <button class="button" id="saveButton" style="display: none;">Save</button>
     <br>
     <br>
-    <button class="button" id="edit" onclick="edit()">Edit</button>
-    <button class="button" id="delete">Delete</button>
-    <button class="button" id="sort" onclick="sort()">Sort</button>
-<br>
-<br>
     </div >
     <div class="wrap">
-    <button class = "barButton" id = "homePage">Home Page</button>
+    <button class = "barButton" id = "homePage" onclick="homePage()">Home Page</button>
     <button class="searchbutton" onclick="search()">
         <img src="./font/search.png" height="20px" alt="search"/>
    
@@ -43,13 +40,15 @@
     <input type="text" id="searchTerm" placeholder="Search">
     <button class = "barButton" id ="addTask" onclick="add()">Add Task</button>
      | 
-    <button class = "barButton" id ="Sort">Sort</button>
+    <button class = "barButton" id ="sort" onmouseenter="sort()" onmouseleave="leaveSort()">Sort</button>
     </div>
     
     <ol id="task_list">
         
     </ol>
-
+    <form onsubmit="onSubmit()">
+        <input type="checkbox" class="input" placeholder="sdfs">
+    </form>
    
 </body>
 
