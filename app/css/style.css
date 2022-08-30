@@ -79,6 +79,7 @@ h1{
    border: 1px solid #333;
    margin: 10px auto;
    background-color: rgb(225, 248, 237);
+   margin: -4px;
  }
 
  #select{
@@ -100,4 +101,13 @@ h1{
   color: white;
   border: none;
   font-size: 17px;
+  position: relative;
+ }
+ #ulOfSort{
+  position: absolute;
+  top: -2px;
+  left: 5px;
+  color: black;
+  font-size: 10px;
+  border-style: none;
  }

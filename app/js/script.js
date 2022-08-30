@@ -7,14 +7,9 @@ let edittingDiv = null;
 function addTask() {
     let taskListElem = document.getElementById('task_list');
     itemElement = document.createElement('li');
-    // itemElement.onclick = onClickItem;
-
     let taskNameElement = document.getElementById("task_name");
-
     let taskName = taskNameElement.value;
-
     let dateInFuture = document.getElementById("datetime_picker");
-
     let dueDate = dateInFuture.value;
 
     taskList.push({ taskName, dueDate })
@@ -36,30 +31,30 @@ function addTask() {
         edit.addEventListener('click', editLi)
         let del = document.createElement('li');
         ul.appendChild(del);
-        del.innerHTML= "Delete";
-        del.addEventListener('click',dele)
+        del.innerHTML = "Delete";
+        del.addEventListener('click', dele)
         let done = document.createElement('li');
         ul.appendChild(done);
         done.addEventListener('click', did);
         done.innerHTML = "Done"
 
     }
-    function leave(event){
-         let btn = event.srcElement
+    function leave(event) {
+        let btn = event.srcElement
         btn.removeChild(btn.childNodes[1]);
-        
+
     }
-    
+
     taskListElem.appendChild(itemElement);
     let div = document.createElement('div');
-     itemElement.appendChild(div);
+    itemElement.appendChild(div);
     let h4 = document.createElement('h4')
     h4.innerHTML = dueDate;
     dateInFuture = document.getElementById("datetime_picker").value = "";
     div.appendChild(h4)
-    let p=document.createElement('p');
+    let p = document.createElement('p');
     p.innerHTML = taskName;
-    document.getElementById("task_name").value= "";
+    document.getElementById("task_name").value = "";
     div.appendChild(p)
     // Save to local storage
     let newIndex = taskList.length;
@@ -69,8 +64,8 @@ function addTask() {
     localStorage.setItem(key, value)
 }
 
-function editLi(event){
- 
+function editLi(event) {
+
     let editbtn = event.srcElement
     let ul = editbtn.parentNode;
     let btn = ul.parentNode;
@@ -79,18 +74,17 @@ function editLi(event){
     let taskName = document.getElementById("task_name");
     let dueDate = document.getElementById("datetime_picker");
     dueDate.value = h4[0].innerHTML;
-    taskName.value =h4[1].innerHTML;
+    taskName.value = h4[1].innerHTML;
     let saveButton = document.getElementById('saveButton');
-    saveButton.addEventListener('click',saveEdit);
-    document.getElementById('saveButton').style.display='initial';
+    saveButton.addEventListener('click', saveEdit);
+    document.getElementById('saveButton').style.display = 'initial';
     document.getElementById('add_task').style.display = 'none';
     let list = btn.parentNode;
     list.style.backgroundColor = "rgba(112,112,122,0.5";
-  
+
 }
-function saveEdit(){
-    if(edittingDiv!= null)
-    {
+function saveEdit() {
+    if (edittingDiv != null) {
         console.log(edittingDiv)
         let h4 = edittingDiv.firstChild
         console.log(h4)
@@ -99,19 +93,19 @@ function saveEdit(){
         p.innerHTML = document.getElementById('task_name').value;
         document.getElementById("datetime_picker").value = '';
         document.getElementById('task_name').value = '';
-        document.getElementById('saveButton').style.display='none';
+        document.getElementById('saveButton').style.display = 'none';
         document.getElementById('add_task').style.display = 'initial';
         let list = edittingDiv.parentNode;
-        list.style.backgroundColor ="rgb(225, 248, 237)";
+        list.style.backgroundColor = "rgb(225, 248, 237)";
     }
-}    
+}
 
 function dele(event) {
     let ul = event.path[3];
     ul.remove();
-    }
+}
 
-function did(event){
+function did(event) {
     console.log(event)
     let btn = event.path[2];
     let div = btn.nextElementSibling;
@@ -125,64 +119,130 @@ function did(event){
     p.appendChild(delP);
     let text1 = p.firstChild
     delP.appendChild(text1)
-}    
-
-function compare(a, b) {
-    let taskNameA = a.dueDate;
-    let taskNameB = b.taskName;
-    let comparison = 0;
-    if (taskNameA > taskNameB) {
-        comparison = 1;
-    }
-    if (taskNameB > taskNameA) {
-        comparison = -1;
-    }
-    return comparison;
 }
 
 function sort() {
-    let taskListSort = taskList.sort(compare)
-    console.log(taskListSort)
+    let ulOfSort = document.createElement('ul');
+    let sortButton = document.getElementById('sort');
+    sortButton.appendChild(ulOfSort);
+    ulOfSort.setAttribute('id', 'ulOfSort');
+    let sortIncrease = document.createElement('li')
+    ulOfSort.appendChild(sortIncrease);
+    sortIncrease.innerHTML = "Ascending day"
+    sortIncrease.addEventListener('click', ascending);
+    let sortDecrease = document.createElement('li');
+    ulOfSort.appendChild(sortDecrease);
+    sortDecrease.innerHTML = "Descending day";
+    sortDecrease.addEventListener('click', Descending);
+}
 
-    let taskListElem = document.getElementById('task_list');
-    console.log(taskListElem)
-    let itemElement = taskListElem.children;
-    console.log(itemElement)
-
-    for (let i = 0; i < taskList.length; i++) {
-
-        itemElement[i].innerHTML = taskListSort[i].dueDate + '<br><br>' + taskListSort[i].taskName
-        console.log(taskListSort[i])
-
+function ascending(){
+    let ol = document.getElementById("task_list");
+    let li = ol.children;
+    let listItem = [];
+    for(let i = 0; i<ol.children.length; i++){
+        listItem.push(li[i]);
+    }
+    listItem.sort(compare);
+     for (let i = ol.children.length-1; i>=0; i--)
+    {
+        console.log(li[i]);
+        li[i].remove();
+        console.log(listItem)
+    }
+    listItem.forEach(element => {
+            ol.appendChild(element)
+    });
     }
 
+
+function compare(libf , liaf){
+    
+    let divbf = libf.lastChild;
+    let divaf = liaf.lastChild;
+    
+    let h4bf = divaf.firstChild;
+    let h4af = divbf.firstChild;
+    
+    let datebf = new Date(h4bf.innerHTML);
+    let dateaf = new Date(h4af.innerHTML);
+        
+    return dateaf > datebf ? 1 : -1
 }
+
+function Descending(){
+    let ol = document.getElementById("task_list");
+    let li = ol.children;
+    let listItem = [];
+    for(let i = 0; i<ol.children.length; i++){
+        listItem.push(li[i]);
+    }
+    listItem.sort(compareDescending);
+     for (let i = ol.children.length-1; i>=0; i--)
+    {
+        console.log(li[i]);
+        li[i].remove();
+        console.log(listItem)
+    }
+    listItem.forEach(element => {
+            ol.appendChild(element)
+    });
+    }
+
+
+function compareDescending(libf , liaf){
+    
+    let divbf = libf.lastChild;
+    let divaf = liaf.lastChild;
+    
+    let h4bf = divaf.firstChild;
+    let h4af = divbf.firstChild;
+    
+    let datebf = new Date(h4bf.innerHTML);
+    let dateaf = new Date(h4af.innerHTML);
+        
+    return datebf > dateaf ? 1 : -1
+}
+
+
+
+function leaveSort() {
+    let sortButton = document.getElementById('sort');
+    let numbOfSort = sortButton.children.length;
+    for (let i = 0; i < numbOfSort; i++) {
+        sortButton.removeChild(sortButton.lastChild);
+    }
+}
+
+
 
 function search() {
-    console.log("search")
-    let input = document.getElementById("searchTerm");
-    let taskListElem = document.getElementById('task_list')
-    let listItem = taskListElem.children;
-    // taskList.forEach(function find(task) {
-    //     if(task.taskName.toUpperCase()==input.value.toUpperCase()){
-    //         listItem.style.display = "block";}
-    //     else{
-    //         listItem.style.display = "none";
-    //     }
-    //     }
+    let searchItem = document.getElementById("searchTerm");
+    let ol = document.getElementById('task_list');
+    let li = ol.children;
+    let numbOfLi = ol.childElementCount
+    console.log(numbOfLi)
+    for (let i = 0; i < numbOfLi; i++) {
+        let div = li[i].lastChild;
+        let child = div.lastChild;
+        console.log(child)
+        if (searchItem.value == child.innerHTML) {
+            li[i].style.display = "block";
 
-    for (let i = 0; i < taskList.length; i++) {
-        if (taskList[i].taskName == input.value) {
-            listItem[i].style.display = "block";
         }
         else {
-            listItem[i].style.display = "none"
-        };
-        console.log(listItem[i])
+            li[i].style.display = "none";
+        }
     }
+    searchItem.value = '';
 
 }
 
-function saveToDoList(todoList) {
-
+function homePage() {
+    let ol = document.getElementById('task_list');
+    let li = ol.children;
+    let numbOfLi = ol.childElementCount
+    for (let i = 0; i < numbOfLi; i++) {
+        li[i].style.display = "block"
+    }
 }
