@@ -4,7 +4,27 @@ h1{
    text-align: center;
    margin-top: 70px;
 }
+#addNewTask{
+  width: 100%;
+  border: 3px solid #333;
+  margin: -8px;
+  
+}
 
+#inputAuth{
+  width: 20%;
+  float: left;
+  margin: -8px;
+  text-align: center;
+  background-color: rgba(123, 123, 123, 0.5);
+}
+
+#listInLeft{
+  width: 80%;
+  float: right;
+  margin: -8px;
+ 
+}
 .para{
    color: aqua;
 }
@@ -103,6 +123,13 @@ h1{
   font-size: 17px;
   position: relative;
  }
+
+ #close{
+  background-color: #4d4dc4;
+  color: white;
+  border: 1px solid white;
+ }
+
  #ulOfSort{
   position: absolute;
   top: -2px;
@@ -110,4 +137,8 @@ h1{
   color: black;
   font-size: 10px;
   border-style: none;
+ }
+
+ #saveEdit{
+  text-align: center;
  }

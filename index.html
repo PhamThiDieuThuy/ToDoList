@@ -11,23 +11,41 @@
 
 <body onload="onLoad()">
     <header>
-        <h1 lang="en">TO DO LIST</h1>
+        <h1 id="h1">TO DO LIST</h1>
     </header>
         
-        <div class="inputAuth">
+    <div id="addNewTask" style="display:none;">
+        <div id="inputAuth">
+            <h1 lang="en">TO DO LIST</h1>
+            <label>Task Name</label>
+            <br>
+            <input class="input" type="text" placeholder="Task name" id="task_name">
+            <br>
+            <br>
+            <label class="due_date">Due date</label>
+            <br>
+            <input class="input" type="date" id="datetime_picker" placeholder="date & time"><br><br>
+            <button class="button" id="add_task" onclick="addTask()">Add Task</button>
+        </div>
+        <div id="listInLeft">
+            <h1>Task List</h1>
+            <ol id="listLeft">
+
+            </ol>
+        </div>
+    </div>
+    <br>
+    <div id="saveEdit" style="display: none;">
         <label>Task Name</label>
         <br>
-        <input class="input" type="text" placeholder="Task name" id="task_name">
+        <input class="input" type="text" placeholder="Task name" id="taskNameEdit">
         <br>
         <br>
         <label class="due_date">Due date</label>
         <br>
-        <input class="input" type="date" id="datetime_picker" placeholder="date & time">
+        <input class="input" type="date" id="datetimePickerEdit" placeholder="date & time"><br><br>    
+        <button class="button" id="saveButton" >Save</button>
     </div>
-    <br>
-    <div class="button1">
-    <button class="button" id="add_task" onclick="addTask()">Add Task</button>
-    <button class="button" id="saveButton" style="display: none;">Save</button>
     <br>
     <br>
     </div >
@@ -39,8 +57,8 @@
     </button>
     <input type="text" id="searchTerm" placeholder="Search">
     <button class = "barButton" id ="addTask" onclick="add()">Add Task</button>
-     | 
     <button class = "barButton" id ="sort" onmouseenter="sort()" onmouseleave="leaveSort()">Sort</button>
+    <button id = "close" style="display:none;">Close</button>
     </div>
     
     <ol id="task_list">

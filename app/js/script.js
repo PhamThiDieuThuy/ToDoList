@@ -4,11 +4,31 @@ let edittingDiv = null;
 let taskListElem = null;
 let taskNameElement = null;
 let dateInFuture = null;
+let listLeft = null;
+let taskNameEdit = null;
+let datetimePickerEdit = null;
+
 
 function onLoad(){
     taskListElem = document.getElementById('task_list');
     taskNameElement = document.getElementById("task_name");
     dateInFuture = document.getElementById("datetime_picker");
+    listLeft= document.getElementById("listLeft")
+    taskNameEdit = document.getElementById('taskNameEdit');
+    datetimePickerEdit = document.getElementById('datetimePickerEdit');
+ }
+
+function add(){
+    let addNewTask = document.getElementById("addNewTask")
+    addNewTask.style.display = "block"
+    
+    let h1= document.getElementById('h1');
+    h1.style.display = "none";
+
+    let close = document.getElementById("close");
+    close.style.display = "initial";
+    close.addEventListener('click',closed);
+    document.getElementById('task_list').style.display = "none";
 }
 
 //add new Task
@@ -17,6 +37,7 @@ function addTask() {
     let dueDate = dateInFuture.value;
 
     let itemElement = document.createElement('li');
+    itemElement.setAttribute('id','itemElement')
     taskListElem.appendChild(itemElement);
 
     let selecter = document.createElement('button');
@@ -39,12 +60,44 @@ function addTask() {
     p.innerHTML = taskName;
     document.getElementById("task_name").value = "";
     div.appendChild(p)
+
+//tao list tai Add Task
+    let itemElementLeft = document.createElement('li');
+    listLeft.appendChild(itemElementLeft);
+    let divLeft = document.createElement('div');
+    itemElementLeft.appendChild(divLeft);
+
+    let h4Left = document.createElement('h4')
+    h4Left.innerHTML = dueDate;
+    dateInFuture.value = "";
+    divLeft.appendChild(h4Left)
+
+    let pLeft = document.createElement('p');
+    pLeft.innerHTML = taskName;
+    document.getElementById("task_name").value = "";
+    divLeft.appendChild(pLeft)
+
     // Save to local storage
     // let newIndex = taskList.length;
 
     // let key = "todo" + newIndex;
     // let value = taskName + "+" + dueDate;
     // localStorage.setItem(key, value)
+}
+
+//Close Add Task
+function closed(){
+    let addNewTask = document.getElementById("addNewTask")
+    addNewTask.style.display = "none";
+    let listLeft = document.getElementById('listLeft');
+    let itemListLeft = listLeft.children;
+    let numOfLiLeft = listLeft.children.length;
+    for(let i= numOfLiLeft-1; i>=0; i--){
+        itemListLeft[i].remove();
+    }
+       
+    h1.style.display = "block";
+    document.getElementById('task_list').style.display = "block";
 }
 
 //function mouseenter in list:
@@ -82,41 +135,46 @@ function leave(event) {
 
 //function edit list
 function editLi(event) {
-    let editbtn = event.srcElement
+    let saveEdit = document.getElementById('saveEdit');
+    saveEdit.style.display = 'block';
+
+    let editbtn = event.srcElement;
     let ul = editbtn.parentNode;
     let btn = ul.parentNode;
-
+ 
     edittingDiv = btn.nextElementSibling;
     let h4 = edittingDiv.childNodes;
 
-    dateInFuture.value = h4[0].innerHTML;
-    taskNameElement.value = h4[1].innerHTML;
+    datetimePickerEdit.value = h4[0].innerHTML;
+    taskNameEdit.value = h4[1].innerHTML;
+    console.log(h4[0], h4[1])
 
     let saveButton = document.getElementById('saveButton');
-    saveButton.addEventListener('click', saveEdit);
-    document.getElementById('saveButton').style.display = 'initial';
-    document.getElementById('add_task').style.display = 'none';
-
+    console.log(saveButton);
+    saveButton.addEventListener('click', saveEdited);
+    saveButton.style.display = 'initial';
+    
     let list = btn.parentNode;
-    list.style.backgroundColor = "rgba(112,112,122,0.5";
+    list.style.backgroundColor = "rgba(112,112,122,0.5)";
 }
 
 //function save edit
-function saveEdit() {
+function saveEdited() {
+    console.log(edittingDiv);
     if (edittingDiv != null) {
         console.log(edittingDiv);
 
         let h4 = edittingDiv.firstChild;
-        h4.innerHTML = dateInFuture.value;
+        h4.innerHTML = datetimePickerEdit.value;
 
         let p = edittingDiv.lastChild;
-        p.innerHTML = taskNameElement.value;
+        p.innerHTML = taskNameEdit.value;
 
         dateInFuture.value = '';
         taskNameElement.value = '';
 
-        document.getElementById('saveButton').style.display = 'none';
-        document.getElementById('add_task').style.display = 'initial';
+        let saveEdit = document.getElementById('saveEdit');
+        saveEdit.style.display = 'none';
 
         let list = edittingDiv.parentNode;
         list.style.backgroundColor = "rgb(225, 248, 237)";
